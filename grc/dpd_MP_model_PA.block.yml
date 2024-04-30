@@ -1,0 +1,43 @@
+id: dpd_MP_model_PA
+label: MP_model_PA
+category: '[dpd]'
+
+templates:
+  imports: from gnuradio import dpd
+  make: dpd.MP_model_PA(${Order}, ${Mem_Depth}, ${Mode}, ${Coeff})
+
+#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
+#     Keys include:
+#     * id (makes the value accessible as keyname, e.g. in the make entry)
+#     * label (label shown in the GUI)
+#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#     * default
+parameters:
+- id: Order
+  label: Order
+  dtype: int
+  default: 1
+- id: Mem_Depth
+  label: Memory Depth
+  dtype: int
+  default: 1
+- id: Mode
+  label: Mode of Operation
+  dtype: string
+  default: "Both"
+  options: ["Both", "Even", "Odd"]
+  option_labels: [Both Terms, Even Terms Only, Odd Terms Only]
+- id: Coeff
+  label: Coeff. Vector (K_a x L_a)
+  dtype: complex_vector
+  default: (1)
+  hide: 'part'
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+outputs:
+- label: out
+  domain: stream
+  dtype: complex
+file_format: 1
